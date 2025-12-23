@@ -11,17 +11,17 @@ OUTPUT_FILENAME="tv_ipv4.m3u"
 # 设置 Git 分支
 OUTPUT_BRANCH="output"
 
-# 设置 UV 路径 (如果不在 PATH 中，请填写绝对路径，例如 /home/username/.cargo/bin/uv)
+# 设置 UV 路径 (如果不在 PATH 中，请填写绝对路径)
 UV_BIN="/root/.local/bin/uv"
+
+# 设置临时工作树路径
+WORKTREE_PATH="/tmp/iptv-collector-output"
 # ----------------------------------------------------------------
 
 # 1. Enter Project Directory
 cd "$PROJECT_DIR" || { echo "Directory not found: $PROJECT_DIR"; exit 1; }
 
-# 2. Update Code (Optional, uncomment if you want auto-update)
-# git pull origin main
-
-# 3. Run Collector
+# 2. Run Collector
 echo "Starting IPTV collection..."
 $UV_BIN run main.py
 
@@ -30,41 +30,49 @@ if [ ! -f "iptv.m3u" ]; then
     exit 1
 fi
 
-# 4. Handle Output
+# 3. Handle Output using Git Worktree
 echo "Preparing to push results..."
 
-# Rename/Copy to temp to survive branch switch
-cp iptv.m3u "/tmp/${OUTPUT_FILENAME}"
-
-# Switch to output branch
-# Fetch latest to ensure we know about output branch
-git fetch origin
-
-if git rev-parse --verify "origin/${OUTPUT_BRANCH}" >/dev/null 2>&1; then
-    # Checkout existing branch
-    git checkout "$OUTPUT_BRANCH"
-    git reset --hard "origin/${OUTPUT_BRANCH}"
-    git pull origin "$OUTPUT_BRANCH"
-else
-    # Create orphan branch if it doesn't exist locally/remotely
-    git checkout --orphan "$OUTPUT_BRANCH"
-    git rm -rf .
+# Clean up any stale worktree
+if [ -d "$WORKTREE_PATH" ]; then
+    git worktree remove --force "$WORKTREE_PATH" || rm -rf "$WORKTREE_PATH"
+    git worktree prune
 fi
 
-# Restore file with new name
-mv "/tmp/${OUTPUT_FILENAME}" "./${OUTPUT_FILENAME}"
+# Fetch latest from remote
+git fetch origin
 
-# 5. Commit and Push
+# Create worktree for the output branch
+# If branch exists remote but not local, this creates local tracking branch
+if ! git worktree add "$WORKTREE_PATH" "$OUTPUT_BRANCH" 2>/dev/null; then
+    # If branch doesn't exist at all, create orphan
+    git worktree add --detach "$WORKTREE_PATH"
+    cd "$WORKTREE_PATH"
+    git checkout --orphan "$OUTPUT_BRANCH"
+    git rm -rf .
+    cd "$PROJECT_DIR"
+fi
+
+# Copy file to worktree
+cp iptv.m3u "$WORKTREE_PATH/$OUTPUT_FILENAME"
+rm iptv.m3u  # Clean up source file
+
+# 4. Commit and Push from worktree
+cd "$WORKTREE_PATH" || exit 1
+
 git config user.email "bot@cron.job"
 git config user.name "Cron Bot"
 
 git add "$OUTPUT_FILENAME"
-git commit -m "Auto-update: $(date '+%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
+if git diff --staged --quiet; then
+    echo "No changes to commit"
+else
+    git commit -m "Auto-update: $(date '+%Y-%m-%d %H:%M:%S')"
+    git push origin "$OUTPUT_BRANCH"
+fi
 
-# Push using local token/ssh config (Ensure authentication is set up)
-git push origin "$OUTPUT_BRANCH"
-
-# 6. Switch back to main (Recommended for next run)
-git checkout main
+# 5. Cleanup
+cd "$PROJECT_DIR"
+git worktree remove --force "$WORKTREE_PATH"
 
 echo "Done."

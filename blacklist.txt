@@ -1,2 +1,4 @@
+/audio/
+/bfgd/
 freetv.top
 catvod.com

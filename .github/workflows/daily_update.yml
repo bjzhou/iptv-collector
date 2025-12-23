@@ -1,0 +1,64 @@
+name: Daily IPTV Update
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # 北京时间每天早上 8 点 (UTC 0 点)
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: ".python-version"
+
+      - name: Install dependencies
+        run: uv sync --all-extras --dev
+
+      - name: Run collector
+        run: uv run main.py
+
+      - name: Commit and Push results
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          
+          # 暂存生成的 m3u 文件
+          if [ ! -f iptv.m3u ]; then
+            echo "Error: iptv.m3u was not generated"
+            exit 1
+          fi
+          cp iptv.m3u /tmp/iptv.m3u
+          
+          # 切换到 output 分支 (如果不存在则创建孤儿分支)
+          git fetch origin
+          if git rev-parse --verify origin/output >/dev/null 2>&1; then
+            git checkout output
+            git reset --hard origin/output
+            git pull origin output
+          else
+            git checkout --orphan output
+            git rm -rf .
+          fi
+
+          # 恢复文件
+          cp /tmp/iptv.m3u .
+
+          # 提交更改
+          git add iptv.m3u
+          git commit -m "Update IPTV playlist: $(date -u)" || echo "No changes to commit"
+          git push -u origin output

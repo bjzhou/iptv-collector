@@ -6,3 +6,4 @@ https://raw.githubusercontent.com/suxuang/myIPTV/main/ipv4.m3u
 https://raw.githubusercontent.com/suxuang/myIPTV/main/移动IPV6.txt
 https://raw.githubusercontent.com/kimwang1978/collect-txt/main/bbxx.m3u
 https://raw.githubusercontent.com/vbskycn/iptv/master/tv/iptv4.m3u
+https://tv.iill.top/m3u/Gather

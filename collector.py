@@ -101,6 +101,10 @@ def filter_playlist(playlist, keywords, blacklist=None):
         is_blacklisted = False
         for blocked in blacklist:
              if blocked in item['url']:
+                 # If the blocked keyword is also in the source URL, allow it (exception)
+                 # e.g. "tv.iill.top" in blacklist, but source is "https://tv.iill.top/..."
+                 if 'source_url' in item and blocked in item['source_url']:
+                     continue
                  is_blacklisted = True
                  break
         if is_blacklisted:
@@ -213,6 +217,11 @@ def process_playlists(urls, keywords, blacklist=None, skip_validation=False):
             channels = parse_m3u(content)
         else:
             channels = parse_txt(content)
+        
+        # Add source_url to each channel
+        for channel in channels:
+            channel['source_url'] = url
+            
         all_channels.extend(channels)
         
     print(f"Total channels found: {len(all_channels)}")

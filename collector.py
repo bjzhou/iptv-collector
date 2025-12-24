@@ -7,6 +7,7 @@ import subprocess
 import concurrent.futures
 import asyncio
 import aiohttp
+import os
 from urllib.parse import urljoin, urlparse
 
 def fetch_content(url):
@@ -341,7 +342,7 @@ def process_playlists(urls, keywords, blacklist=None, skip_validation=False):
         print("Validating channels with FFmpeg (this still takes some time)...")
         
         from tqdm import tqdm
-        with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=os.cpu_count() * 2) as executor:
             futures = {executor.submit(check_stream, item): item for item in deduped_channels}
             for future in tqdm(concurrent.futures.as_completed(futures), total=len(futures), unit="stream"):
                 result = future.result()

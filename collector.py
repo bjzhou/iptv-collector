@@ -1,12 +1,13 @@
 
 import re
+import json
 import time
 import requests
 import subprocess
 import concurrent.futures
 import asyncio
 import aiohttp
-from urllib.parse import urlparse
+from urllib.parse import urljoin, urlparse
 
 def fetch_content(url):
     """Fetches content from a URL."""
@@ -82,7 +83,7 @@ def parse_txt(content):
 
 def clean_name(name):
     """Cleans channel name by removing specific suffixes."""
-    name = re.sub(r'_\d+M\d+', '', name)
+    name = re.sub(r'_.+M.+', '', name)
     name = re.sub(r'\(.*?\)', '', name) 
     return name.strip()
 
@@ -161,46 +162,125 @@ def run_async_check(items):
         loop = asyncio.get_event_loop()
         return loop.run_until_complete(filter_playlist_async(items))
 
+def parse_resolution(stdout_data):
+    """从 ffprobe 的 JSON 输出中提取分辨率"""
+    try:
+        data = json.loads(stdout_data)
+        streams = data.get('streams', [])
+        if not streams:
+            # print("Failed to parse resolution: No streams found")
+            return None
+        width = streams[0].get('width') or streams[0].get('coded_width', 0)
+        height = streams[0].get('height') or streams[0].get('coded_height', 0)
+        if width > 0 and height > 0:
+            return f"{width}x{height}"
+    except Exception as e:
+        print(f"Failed to parse resolution: {e}")
+        pass
+    return None
+
 def check_stream(item):
-    """Checks stream validity and latency."""
     url = item['url']
     start_time = time.time()
     
-    # Try FFmpeg first
-    cmd = [
-        "ffmpeg", 
-        "-i", url, 
-        "-t", "1", 
-        "-f", "null", 
-        "-", 
-        "-v", "error"
-    ]
-    
+    headers = {
+        "User-Agent": "iPhone",
+        "Referer": f"{urlparse(url).scheme}://{urlparse(url).netloc}/"
+    }
+
+    # 逻辑：判断是否 M3U8 -> (如果是) 解析分片 -> Python 下载流前段 -> 塞给 ffprobe
     try:
-        subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=10, check=True)
-        latency = (time.time() - start_time) * 1000
-        item['latency'] = latency
-        return item
-    except FileNotFoundError:
-        # Fallback to requests if ffmpeg missing
-        pass
-    except (subprocess.CalledProcessError, subprocess.TimeoutExpired):
-        # FFmpeg failed implies stream is invalid, do not fallback
+        segment_url = url
+        is_m3u8 = False
+
+        # 1. 探测链接类型 (避免直接下载大文件)
+        try:
+            with requests.get(url, headers=headers, stream=True, timeout=10) as r_probe:
+                if r_probe.status_code != 200:
+                    return None
+                
+                # 读取头部检测是否有 M3U8 特征
+                first_chunk = next(r_probe.iter_content(chunk_size=2048), b"")
+                content_str = first_chunk.decode('utf-8', errors='ignore')
+                if "#EXTM3U" in content_str or "#EXTINF" in content_str:
+                    is_m3u8 = True
+        except Exception:
+            return None
+
+        if is_m3u8:
+            # 2. 如果是 M3U8，需获取完整列表提取分片
+            r_playlist = requests.get(url, headers=headers, timeout=10)
+            if r_playlist.status_code != 200:
+                return None
+
+            lines = r_playlist.text.splitlines()
+            segment_path = next((line.strip() for line in lines if line.strip() and not line.startswith("#")), None)
+            
+            if not segment_path:
+                return None
+                
+            segment_url = urljoin(url, segment_path)
+
+        cmd = [
+            "ffprobe",
+            "-v", "quiet",
+            "-print_format", "json",
+            "-show_streams",
+            "-select_streams", "v:0",
+            # "-f", "mpegts",
+            "-analyzeduration", "100000", 
+            "-probesize", "512000",
+            "-i", "-"
+        ]
+        
+        # 3. 启动 ffprobe，准备接收管道数据
+        ffprobe_process = subprocess.Popen(
+            cmd,
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.DEVNULL
+        )
+
+        # 4. 请求分片数据并通过管道写入 ffprobe
+        chunk_data = bytearray()
+        target_size = 512 * 1024 # 目标 512KB
+        with requests.get(segment_url, headers=headers, stream=True, timeout=10) as r_segment:
+            if r_segment.status_code != 200:
+                return None
+            
+            start_download = time.time()
+
+            for chunk in r_segment.iter_content(chunk_size=4096):
+                if time.time() - start_download > 8: # 硬性限制：下载过程不能超过 8 秒
+                    break 
+                
+                if chunk:
+                    chunk_data.extend(chunk)
+                    if len(chunk_data) >= target_size:
+                        break
+            
+            if len(chunk_data) == 0:
+                return None
+            
+            try:
+                stdout_data, _ = ffprobe_process.communicate(input=chunk_data, timeout=10)
+            except subprocess.TimeoutExpired:
+                ffprobe_process.kill()
+                print(f"Timeout while checking segment: {segment_url}")
+                return None
+
+        # 5. 解析结果
+        res = parse_resolution(stdout_data)
+        if res:
+            item['latency'] = int((time.time() - start_time) * 1000)
+            item['resolution'] = res
+            return item
+
+    except Exception as e:
+        # print(f"Deep check failed: {e}")
         return None
 
-    # Fallback to requests if ffmpeg missing (indented to match try block if pass executed)
-    try:
-        with requests.get(url, stream=True, timeout=5) as r:
-            r.raise_for_status()
-            # Read a small chunk to ensure it's streaming
-            for chunk in r.iter_content(chunk_size=1024):
-                if chunk:
-                    break
-            latency = (time.time() - start_time) * 1000
-            item['latency'] = latency
-            return item
-    except Exception:
-        return None
+    return None
 
 def process_playlists(urls, keywords, blacklist=None, skip_validation=False):
     """Main processing logic."""
@@ -213,7 +293,7 @@ def process_playlists(urls, keywords, blacklist=None, skip_validation=False):
         if not content:
             continue
             
-        if url.endswith(".m3u") or ".m3u" in url:
+        if "#EXTM3U" in content:
             channels = parse_m3u(content)
         else:
             channels = parse_txt(content)
@@ -261,7 +341,7 @@ def process_playlists(urls, keywords, blacklist=None, skip_validation=False):
         print("Validating channels with FFmpeg (this still takes some time)...")
         
         from tqdm import tqdm
-        with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
             futures = {executor.submit(check_stream, item): item for item in deduped_channels}
             for future in tqdm(concurrent.futures.as_completed(futures), total=len(futures), unit="stream"):
                 result = future.result()

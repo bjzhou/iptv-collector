@@ -72,6 +72,7 @@ cd "$WORKTREE_PATH" || exit 1
 # [关键步骤] 强制同步 output 分支状态，防止 non-fast-forward 报错
 if git show-ref --verify --quiet "refs/remotes/origin/$OUTPUT_BRANCH"; then
     echo "Syncing output branch with remote..."
+    git fetch origin "$OUTPUT_BRANCH"
     git reset --hard "origin/$OUTPUT_BRANCH"
 fi
 

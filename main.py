@@ -1,6 +1,6 @@
 
 import os
-from collector import process_playlists, generate_m3u
+from collector import process_playlists, generate_m3u, generate_txt
 
 def main():
     # 1. Read files
@@ -27,14 +27,21 @@ def main():
 
     # 3. Export
     if channels:
-        output_content = generate_m3u(channels)
+        # Export M3U
+        m3u_content = generate_m3u(channels)
         with open("iptv.m3u", "w", encoding="utf-8") as f:
-            f.write(output_content)
+            f.write(m3u_content)
         print(f"Successfully generated 'iptv.m3u' with {len(channels)} channels.")
+
+        # Export TXT
+        txt_content = generate_txt(channels)
+        with open("iptv.txt", "w", encoding="utf-8") as f:
+            f.write(txt_content)
+        print(f"Successfully generated 'iptv.txt' with {len(channels)} channels.")
         
         # Verify first few lines
-        print("\nPreview of generated playlist:")
-        print("\n".join(output_content.splitlines()[:5]))
+        print("\nPreview of generated M3U:")
+        print("\n".join(m3u_content.splitlines()[:5]))
     else:
         print("No valid channels found.")
 

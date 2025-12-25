@@ -113,10 +113,11 @@ def filter_playlist(playlist, keywords, blacklist=None):
             continue
 
         cleaned_name = clean_name(item['name'])
-        item['clean_name'] = cleaned_name
         for i, keyword in enumerate(keywords):
             if keyword in cleaned_name:
                 item['priority'] = i
+                item['keyword'] = keyword
+                item['clean_name'] = cleaned_name
                 filtered.append(item)
                 break
     return filtered
@@ -388,4 +389,18 @@ def generate_m3u(channels):
         
         lines.append(f"#EXTINF:-1{attr_str},{name}")
         lines.append(url)
+    return "\n".join(lines)
+
+def generate_txt(channels):
+    """Generates TXT content (name,url format) with genre grouping."""
+    lines = []
+    current_genre = None
+    for item in channels:
+        genre = item.get('keyword', '其他')
+        if genre != current_genre:
+            lines.append(f"{genre},#genre#")
+            current_genre = genre
+        
+        lines.append(f"{item['clean_name']},{item['url']}")
+    
     return "\n".join(lines)

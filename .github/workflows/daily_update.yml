@@ -37,13 +37,14 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           
-          # 暂存生成的 m3u 文件
-          if [ ! -f iptv.m3u ]; then
-            echo "Error: iptv.m3u was not generated"
+          # 暂存生成的文件
+          if [ ! -f iptv.m3u ] || [ ! -f iptv.txt ]; then
+            echo "Error: iptv.m3u or iptv.txt was not generated"
             exit 1
           fi
           cp iptv.m3u /tmp/iptv.m3u
-          rm iptv.m3u
+          cp iptv.txt /tmp/iptv.txt
+          rm iptv.m3u iptv.txt
           
           # 切换到 output 分支 (如果不存在则创建孤儿分支)
           git fetch origin
@@ -58,8 +59,9 @@ jobs:
 
           # 恢复文件
           cp /tmp/iptv.m3u .
+          cp /tmp/iptv.txt .
 
           # 提交更改
-          git add iptv.m3u
+          git add iptv.m3u iptv.txt
           git commit -m "Update IPTV playlist: $(date -u)" || echo "No changes to commit"
           git push -u origin output

@@ -42,13 +42,15 @@ echo "Starting IPTV collection..."
 $UV_BIN sync
 $UV_BIN run main.py
 
-if [ ! -f "iptv.m3u" ]; then
-    echo "Error: iptv.m3u generation failed."
+if [ ! -f "iptv.m3u" ] || [ ! -f "iptv.txt" ]; then
+    echo "Error: IPTV generation failed (m3u or txt missing)."
     exit 1
 fi
 
 # 3. Handle Output using Git Worktree
-echo "Preparing to push results to $OUTPUT_FILENAME..."
+# 提取文件名（不含扩展名）
+OUTPUT_BASENAME="${OUTPUT_FILENAME%.*}"
+echo "Preparing to push results for $OUTPUT_BASENAME..."
 
 # Clean up any stale worktree
 if [ -d "$WORKTREE_PATH" ]; then
@@ -76,27 +78,27 @@ if git show-ref --verify --quiet "refs/remotes/origin/$OUTPUT_BRANCH"; then
     git reset --hard "origin/$OUTPUT_BRANCH"
 fi
 
-# Copy file to worktree
-# 源文件在 PROJECT_DIR，目标文件名为脚本参数
-cp "$PROJECT_DIR/iptv.m3u" "./$OUTPUT_FILENAME"
+# Copy files to worktree
+cp "$PROJECT_DIR/iptv.m3u" "./$OUTPUT_BASENAME.m3u"
+cp "$PROJECT_DIR/iptv.txt" "./$OUTPUT_BASENAME.txt"
 
 # 配置 Git 用户
 git config user.email "bot@cron.job"
 git config user.name "Cron Bot"
 
 # 提交并推送
-git add "$OUTPUT_FILENAME"
+git add "$OUTPUT_BASENAME.m3u" "$OUTPUT_BASENAME.txt"
 
 if git diff --staged --quiet; then
-    echo "No changes to commit for $OUTPUT_FILENAME"
+    echo "No changes to commit for $OUTPUT_BASENAME"
 else
-    git commit -m "Auto-update $OUTPUT_FILENAME: $(date '+%Y-%m-%d %H:%M:%S')"
+    git commit -m "Auto-update $OUTPUT_BASENAME: $(date '+%Y-%m-%d %H:%M:%S')"
     git push origin "$OUTPUT_BRANCH"
 fi
 
 # 5. Cleanup
 # 清理源文件
-rm "$PROJECT_DIR/iptv.m3u"
+rm "$PROJECT_DIR/iptv.m3u" "$PROJECT_DIR/iptv.txt"
 
 # 切回主目录清理工作树
 cd "$PROJECT_DIR" || exit 1

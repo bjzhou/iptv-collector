@@ -9,14 +9,18 @@
 * Github Actions 每天自动更新：
 
   直链：https://raw.githubusercontent.com/bjzhou/iptv-collector/output/iptv.m3u
+       https://raw.githubusercontent.com/bjzhou/iptv-collector/output/iptv.txt
   
   代理：https://testingcf.jsdelivr.net/gh/bjzhou/iptv-collector@output/iptv.m3u
+       https://testingcf.jsdelivr.net/gh/bjzhou/iptv-collector@output/iptv.txt
 
 * 移动宽带不定期更新（含上海移动 IPV6 专属源）：
 
   直链：https://raw.githubusercontent.com/bjzhou/iptv-collector/output/iptv-cm.m3u
+       https://raw.githubusercontent.com/bjzhou/iptv-collector/output/iptv-cm.txt
   
   代理：https://testingcf.jsdelivr.net/gh/bjzhou/iptv-collector@output/iptv-cm.m3u
+       https://testingcf.jsdelivr.net/gh/bjzhou/iptv-collector@output/iptv-cm.txt
 
 
 ## ✨ 功能特点

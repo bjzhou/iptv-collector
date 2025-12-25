@@ -243,40 +243,44 @@ def check_stream(item):
             stderr=subprocess.DEVNULL
         )
 
-        # 4. 请求分片数据并通过管道写入 ffprobe
-        chunk_data = bytearray()
-        target_size = 512 * 1024 # 目标 512KB
-        with requests.get(segment_url, headers=headers, stream=True, timeout=10) as r_segment:
-            if r_segment.status_code != 200:
-                return None
-            
-            start_download = time.time()
-
-            for chunk in r_segment.iter_content(chunk_size=4096):
-                if time.time() - start_download > 8: # 硬性限制：下载过程不能超过 8 秒
-                    break 
+        try:
+            # 4. 请求分片数据并通过管道写入 ffprobe
+            chunk_data = bytearray()
+            target_size = 512 * 1024 # 目标 512KB
+            with requests.get(segment_url, headers=headers, stream=True, timeout=10) as r_segment:
+                if r_segment.status_code != 200:
+                    return None
                 
-                if chunk:
-                    chunk_data.extend(chunk)
-                    if len(chunk_data) >= target_size:
-                        break
-            
-            if len(chunk_data) == 0:
-                return None
-            
-            try:
-                stdout_data, _ = ffprobe_process.communicate(input=chunk_data, timeout=10)
-            except subprocess.TimeoutExpired:
-                ffprobe_process.kill()
-                print(f"Timeout while checking segment: {segment_url}")
-                return None
+                start_download = time.time()
 
-        # 5. 解析结果
-        res = parse_resolution(stdout_data)
-        if res:
-            item['latency'] = int((time.time() - start_time) * 1000)
-            item['resolution'] = res
-            return item
+                for chunk in r_segment.iter_content(chunk_size=4096):
+                    if time.time() - start_download > 8: # 硬性限制：下载过程不能超过 8 秒
+                        break 
+                    
+                    if chunk:
+                        chunk_data.extend(chunk)
+                        if len(chunk_data) >= target_size:
+                            break
+                
+                if len(chunk_data) == 0:
+                    return None
+                
+                try:
+                    stdout_data, _ = ffprobe_process.communicate(input=chunk_data, timeout=10)
+                except subprocess.TimeoutExpired:
+                    ffprobe_process.kill()
+                    print(f"Timeout while checking segment: {segment_url}")
+                    return None
+
+            # 5. 解析结果
+            res = parse_resolution(stdout_data)
+            if res:
+                item['latency'] = int((time.time() - start_time) * 1000)
+                item['resolution'] = res
+                return item
+        finally:
+            if ffprobe_process.poll() is None:
+                ffprobe_process.kill()
 
     except Exception as e:
         # print(f"Deep check failed: {e}")

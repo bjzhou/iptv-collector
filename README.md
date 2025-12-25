@@ -4,6 +4,21 @@
 
 本项目旨在帮助用户从众多的订阅源中筛选出高质量、低延迟的有效直播源，并生成整洁的 M3U 播放列表。
 
+## 直播源
+
+* Github Actions 每天自动更新：
+
+  直链：https://raw.githubusercontent.com/bjzhou/iptv-collector/output/iptv.m3u
+  
+  代理：https://testingcf.jsdelivr.net/gh/bjzhou/iptv-collector@output/iptv.m3u
+
+* 移动宽带不定期更新（含上海移动 IPV6 专属源）：
+
+  直链：https://raw.githubusercontent.com/bjzhou/iptv-collector/output/iptv-cm.m3u
+  
+  代理：https://testingcf.jsdelivr.net/gh/bjzhou/iptv-collector@output/iptv-cm.m3u
+
+
 ## ✨ 功能特点
 
 *   **多格式支持**: 兼容 M3U 和 TXT 格式的直播源订阅链接。
@@ -12,7 +27,7 @@
     *   **黑名单机制**: 通过 `blacklist.txt` 剔除包含特定关键字的无效 URL。
 *   **双重检测机制**:
     *   **极速初筛**: 利用 `asyncio` + `aiohttp` 进行高并发 HTTP 状态检查，快速剔除死链。
-    *   **深度质检**: 调用 `FFmpeg` 对流媒体进行实际解码测试（未安装 FFmpeg 时自动降级为 HTTP 流检测）。
+    *   **深度质检**: 调用 `FFmpeg` 对流媒体进行实际解码测试。
 *   **智能排序策略**:
     1.  **优先级**: 按 `keywords.txt` 中的顺序优先排列。
     2.  **名称**: 按频道名称的自然顺序排列（例如 CCTV-1 在 CCTV-2 之前）。

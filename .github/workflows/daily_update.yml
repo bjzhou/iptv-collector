@@ -2,7 +2,7 @@ name: Daily IPTV Update
 
 on:
   schedule:
-    - cron: '0 0 * * *' # 北京时间每天早上 8 点 (UTC 0 点)
+    - cron: '0 0 * * *'
   workflow_dispatch:
 
 jobs:
@@ -28,6 +28,11 @@ jobs:
 
       - name: Install dependencies
         run: uv sync --all-extras --dev
+
+      - name: Setup WARP
+        uses: fscarmen/warp-on-actions@v1.4
+        with:
+          stack: dual
 
       - name: Run collector
         run: uv run main.py

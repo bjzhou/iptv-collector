@@ -8,7 +8,37 @@ import concurrent.futures
 import asyncio
 import aiohttp
 import os
+import socket
 from urllib.parse import urljoin, urlparse
+
+_ipv6_support = None
+
+def is_ipv6_supported():
+    """Checks if the current environment supports IPv6."""
+    global _ipv6_support
+    if _ipv6_support is not None:
+        return _ipv6_support
+    
+    try:
+        # Try to connect to a reliable IPv6 host (Alibaba DNS)
+        sock = socket.socket(socket.AF_INET6, socket.SOCK_DGRAM)
+        sock.settimeout(2)
+        sock.connect(("2400:3200::1", 80))
+        sock.close()
+        _ipv6_support = True
+        print("IPv6 is supported.")
+    except Exception:
+        _ipv6_support = False
+        print("IPv6 is not supported.")
+    return _ipv6_support
+
+def is_ipv6_url(url):
+    """Checks if the URL is a literal IPv6 URL."""
+    try:
+        hostname = urlparse(url).hostname
+        return hostname and ":" in hostname
+    except Exception:
+        return False
 
 def fetch_content(url):
     """Fetches content from a URL."""
@@ -118,6 +148,11 @@ def filter_playlist(playlist, keywords, blacklist=None):
                 item['priority'] = i
                 item['keyword'] = keyword
                 item['clean_name'] = cleaned_name
+                
+                # Check IPv6 support
+                if is_ipv6_url(item['url']) and not is_ipv6_supported():
+                    continue
+                    
                 filtered.append(item)
                 break
     return filtered

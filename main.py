@@ -5,20 +5,20 @@ from collector import process_playlists, generate_m3u, generate_txt
 def main():
     # 1. Read files
     try:
-        with open("subscribe.txt", "r", encoding="utf-8") as f:
+        with open("config/subscribe.txt", "r", encoding="utf-8") as f:
             urls = [line.strip() for line in f if line.strip() and not line.strip().startswith("#")]
         
-        with open("keywords.txt", "r", encoding="utf-8") as f:
+        with open("config/keywords.txt", "r", encoding="utf-8") as f:
             keywords = [line.strip() for line in f if line.strip() and not line.strip().startswith("#")]
         
         blacklist = []
-        if os.path.exists("blacklist.txt"):
-             with open("blacklist.txt", "r", encoding="utf-8") as f:
+        if os.path.exists("config/blacklist.txt"):
+             with open("config/blacklist.txt", "r", encoding="utf-8") as f:
                 blacklist = [line.strip() for line in f if line.strip() and not line.strip().startswith("#")]
 
         whitelist = []
-        if os.path.exists("whitelist.txt"):
-             with open("whitelist.txt", "r", encoding="utf-8") as f:
+        if os.path.exists("config/whitelist.txt"):
+             with open("config/whitelist.txt", "r", encoding="utf-8") as f:
                 whitelist = [line.strip() for line in f if line.strip() and not line.strip().startswith("#")]
 
     except FileNotFoundError as e:

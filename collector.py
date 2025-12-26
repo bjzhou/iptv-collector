@@ -122,27 +122,36 @@ def natural_key(string_):
     """See http://www.codinghorror.com/blog/archives/001018.html"""
     return [int(s) if s.isdigit() else s for s in re.split(r'(\d+)', string_)]
 
-def filter_playlist(playlist, keywords, blacklist=None):
+def filter_playlist(playlist, keywords, blacklist=None, whitelist=None):
     """Filters playlist based on keywords and blacklist."""
     filtered = []
     if blacklist is None:
         blacklist = []
         
     for item in playlist:
-        # Check blacklist first
-        is_blacklisted = False
-        for blocked in blacklist:
-             if blocked in item['url']:
-                 # If the blocked keyword is also in the source URL, allow it (exception)
-                 # e.g. "tv.iill.top" in blacklist, but source is "https://tv.iill.top/..."
-                 if 'source_url' in item and blocked in item['source_url']:
-                     continue
-                 is_blacklisted = True
-                 break
-        if is_blacklisted:
-            continue
+        # 1. Check whitelist first
+        is_whitelisted = False
+        if whitelist:
+            for w in whitelist:
+                if w in item['url']:
+                    is_whitelisted = True
+                    break
+        
+        # 2. Check blacklist (only if not whitelisted)
+        if not is_whitelisted:
+            is_blacklisted = False
+            for blocked in blacklist:
+                 if blocked in item['url']:
+                     if 'source_url' in item and blocked in item['source_url']:
+                         continue
+                     is_blacklisted = True
+                     break
+            if is_blacklisted:
+                continue
 
+        # 3. Match keywords
         cleaned_name = clean_name(item['name'])
+        matched_keyword = False
         for i, keyword in enumerate(keywords):
             if keyword in cleaned_name:
                 item['priority'] = i
@@ -151,10 +160,21 @@ def filter_playlist(playlist, keywords, blacklist=None):
                 
                 # Check IPv6 support
                 if is_ipv6_url(item['url']) and not is_ipv6_supported():
+                    # We might still want to skip if IPv6 is not supported, 
+                    # even if whitelisted. But if it's whitelisted, maybe the user knows what they're doing.
+                    # Let's keep IPv6 check for now.
                     continue
                     
                 filtered.append(item)
+                matched_keyword = True
                 break
+        
+        # 4. If whitelisted but no keyword match, still keep it
+        if not matched_keyword and is_whitelisted:
+            item['priority'] = len(keywords)
+            item['keyword'] = '白名单'
+            item['clean_name'] = cleaned_name
+            filtered.append(item)
     return filtered
 
 async def check_url_async(session, item, timeout=5):
@@ -323,7 +343,7 @@ def check_stream(item):
 
     return None
 
-def process_playlists(urls, keywords, blacklist=None, skip_validation=False):
+def process_playlists(urls, keywords, blacklist=None, whitelist=None, skip_validation=False):
     """Main processing logic."""
     all_channels = []
     
@@ -348,7 +368,7 @@ def process_playlists(urls, keywords, blacklist=None, skip_validation=False):
     print(f"Total channels found: {len(all_channels)}")
 
     # 2. Filter & Clean
-    filtered_channels = filter_playlist(all_channels, keywords, blacklist)
+    filtered_channels = filter_playlist(all_channels, keywords, blacklist, whitelist)
     print(f"Channels after filtering: {len(filtered_channels)}")
 
     # 3. Deduplicate
@@ -368,7 +388,25 @@ def process_playlists(urls, keywords, blacklist=None, skip_validation=False):
     # 4. Async Pre-check (Fast)
     if not skip_validation:
         print("Running fast async pre-check...")
-        deduped_channels = run_async_check(deduped_channels)
+        if whitelist:
+            to_check = []
+            skipped = []
+            for item in deduped_channels:
+                url = item['url']
+                if any(w in url for w in whitelist):
+                    skipped.append(item)
+                else:
+                    to_check.append(item)
+            
+            if to_check:
+                checked = run_async_check(to_check)
+            else:
+                checked = []
+            
+            deduped_channels = checked + skipped
+            print(f"Whitelisted {len(skipped)} channels skipped async check.")
+        else:
+            deduped_channels = run_async_check(deduped_channels)
     
     # 5. Validate & Match Latency (Deep Check)
     valid_channels = []

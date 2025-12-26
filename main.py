@@ -16,14 +16,19 @@ def main():
              with open("blacklist.txt", "r", encoding="utf-8") as f:
                 blacklist = [line.strip() for line in f if line.strip() and not line.strip().startswith("#")]
 
+        whitelist = []
+        if os.path.exists("whitelist.txt"):
+             with open("whitelist.txt", "r", encoding="utf-8") as f:
+                whitelist = [line.strip() for line in f if line.strip() and not line.strip().startswith("#")]
+
     except FileNotFoundError as e:
         print(f"Error: {e}")
         return
 
-    print(f"Loaded {len(urls)} subscription URLs, {len(keywords)} keywords, and {len(blacklist)} blacklist items.")
+    print(f"Loaded {len(urls)} subscription URLs, {len(keywords)} keywords, {len(blacklist)} blacklist items, and {len(whitelist)} whitelist items.")
 
     # 2. Process
-    channels = process_playlists(urls, keywords, blacklist)
+    channels = process_playlists(urls, keywords, blacklist, whitelist=whitelist)
 
     # 3. Export
     if channels:

@@ -129,11 +129,17 @@ def filter_playlist(playlist, keywords, blacklist=None, whitelist=None):
         blacklist = []
         
     for item in playlist:
+        url = item['url']
+        
+        # 0. Check IPv6 support first
+        if is_ipv6_url(url) and not is_ipv6_supported():
+            continue
+
         # 1. Check whitelist first
         is_whitelisted = False
         if whitelist:
             for w in whitelist:
-                if w in item['url']:
+                if w in url:
                     is_whitelisted = True
                     break
         
@@ -141,7 +147,7 @@ def filter_playlist(playlist, keywords, blacklist=None, whitelist=None):
         if not is_whitelisted:
             is_blacklisted = False
             for blocked in blacklist:
-                 if blocked in item['url']:
+                 if blocked in url:
                      if 'source_url' in item and blocked in item['source_url']:
                          continue
                      is_blacklisted = True
@@ -157,14 +163,6 @@ def filter_playlist(playlist, keywords, blacklist=None, whitelist=None):
                 item['priority'] = i
                 item['keyword'] = keyword
                 item['clean_name'] = cleaned_name
-                
-                # Check IPv6 support
-                if is_ipv6_url(item['url']) and not is_ipv6_supported():
-                    # We might still want to skip if IPv6 is not supported, 
-                    # even if whitelisted. But if it's whitelisted, maybe the user knows what they're doing.
-                    # Let's keep IPv6 check for now.
-                    continue
-                    
                 filtered.append(item)
                 matched_keyword = True
                 break
@@ -324,7 +322,7 @@ def check_stream(item):
                     stdout_data, _ = ffprobe_process.communicate(input=chunk_data, timeout=10)
                 except subprocess.TimeoutExpired:
                     ffprobe_process.kill()
-                    print(f"Timeout while checking segment: {segment_url}")
+                    # print(f"Timeout while checking segment: {segment_url}")
                     return None
 
             # 5. 解析结果

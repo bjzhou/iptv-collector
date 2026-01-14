@@ -237,7 +237,10 @@ def parse_resolution(stdout_data):
 def check_stream(item):
     url = item['url']
     start_time = time.time()
-    
+
+    import sys
+    print(f"[DEBUG] Starting check for: {url}", file=sys.stderr, flush=True)
+
     headers = {
         "User-Agent": "iPhone",
         "Referer": f"{urlparse(url).scheme}://{urlparse(url).netloc}/"
@@ -249,6 +252,7 @@ def check_stream(item):
         is_m3u8 = False
 
         # 1. 探测链接类型 (避免直接下载大文件)
+        print(f"[DEBUG] Probing URL type: {url}", file=sys.stderr, flush=True)
         try:
             with requests.get(url, headers=headers, stream=True, timeout=10) as r_probe:
                 if r_probe.status_code != 200:
@@ -259,10 +263,13 @@ def check_stream(item):
                 content_str = first_chunk.decode('utf-8', errors='ignore')
                 if "#EXTM3U" in content_str or "#EXTINF" in content_str:
                     is_m3u8 = True
-        except Exception:
+                    print(f"[DEBUG] Detected M3U8: {url}", file=sys.stderr, flush=True)
+        except Exception as e:
+            print(f"[DEBUG] Probe failed: {url}, error: {e}", file=sys.stderr, flush=True)
             return None
 
         if is_m3u8:
+            print(f"[DEBUG] Downloading M3U8 playlist: {url}", file=sys.stderr, flush=True)
             # 2. 如果是 M3U8，需获取完整列表提取分片
             r_playlist = requests.get(url, headers=headers, timeout=10)
             if r_playlist.status_code != 200:
@@ -272,10 +279,13 @@ def check_stream(item):
             segment_path = next((line.strip() for line in lines if line.strip() and not line.startswith("#")), None)
             
             if not segment_path:
+                print(f"[DEBUG] No segment found in M3U8: {url}", file=sys.stderr, flush=True)
                 return None
-                
-            segment_url = urljoin(url, segment_path)
 
+            segment_url = urljoin(url, segment_path)
+            print(f"[DEBUG] Using segment URL: {segment_url}", file=sys.stderr, flush=True)
+
+        print(f"[DEBUG] Starting ffprobe process for: {url}", file=sys.stderr, flush=True)
         cmd = [
             "ffprobe",
             "-v", "quiet",
@@ -298,6 +308,7 @@ def check_stream(item):
 
         try:
             # 4. 请求分片数据并通过管道写入 ffprobe
+            print(f"[DEBUG] Downloading segment: {segment_url}", file=sys.stderr, flush=True)
             chunk_data = bytearray()
             target_size = 512 * 1024 # 目标 512KB
             with requests.get(segment_url, headers=headers, stream=True, timeout=10) as r_segment:
@@ -316,8 +327,10 @@ def check_stream(item):
                             break
                 
                 if len(chunk_data) == 0:
+                    print(f"[DEBUG] No data downloaded: {segment_url}", file=sys.stderr, flush=True)
                     return None
-                
+
+                print(f"[DEBUG] Downloaded {len(chunk_data)} bytes, running ffprobe: {url}", file=sys.stderr, flush=True)
                 try:
                     stdout_data, _ = ffprobe_process.communicate(input=chunk_data, timeout=10)
                 except subprocess.TimeoutExpired:
@@ -328,15 +341,19 @@ def check_stream(item):
             # 5. 解析结果
             res = parse_resolution(stdout_data)
             if res:
-                item['latency'] = int((time.time() - start_time) * 1000)
+                elapsed = int((time.time() - start_time) * 1000)
+                print(f"[DEBUG] SUCCESS: {url}, resolution: {res}, latency: {elapsed}ms", file=sys.stderr, flush=True)
+                item['latency'] = elapsed
                 item['resolution'] = res
                 return item
+            else:
+                print(f"[DEBUG] Failed to parse resolution: {url}", file=sys.stderr, flush=True)
         finally:
             if ffprobe_process.poll() is None:
                 ffprobe_process.kill()
 
     except Exception as e:
-        # print(f"Deep check failed: {e}")
+        print(f"[DEBUG] Exception in check_stream: {url}, error: {type(e).__name__}: {e}", file=sys.stderr, flush=True)
         return None
 
     return None
@@ -418,16 +435,35 @@ def process_playlists(urls, keywords, blacklist=None, whitelist=None, skip_valid
         print("Validating channels with FFmpeg (this still takes some time)...")
 
         from tqdm import tqdm
+        import sys
+
+        print(f"[INFO] Using {os.cpu_count() * 2} worker threads", file=sys.stderr, flush=True)
+        print(f"[INFO] Total items to check: {len(deduped_channels)}", file=sys.stderr, flush=True)
+
         with concurrent.futures.ThreadPoolExecutor(max_workers=os.cpu_count() * 2) as executor:
             futures = {executor.submit(check_stream, item): item for item in deduped_channels}
+
+            completed_count = 0
+            timeout_count = 0
+            error_count = 0
+
             for future in tqdm(concurrent.futures.as_completed(futures, timeout=30), total=len(futures), unit="stream"):
                 try:
                     result = future.result(timeout=30)
                     if result:
                         valid_channels.append(result)
-                except (concurrent.futures.TimeoutError, Exception) as e:
-                    # Skip streams that timeout or error
-                    pass
+                        completed_count += 1
+                    else:
+                        error_count += 1
+                except concurrent.futures.TimeoutError as e:
+                    timeout_count += 1
+                    item = futures[future]
+                    print(f"[ERROR] Timeout on: {item['url']}", file=sys.stderr, flush=True)
+                except Exception as e:
+                    error_count += 1
+                    print(f"[ERROR] Exception: {type(e).__name__}: {e}", file=sys.stderr, flush=True)
+
+            print(f"\n[STATS] Completed: {completed_count}, Errors: {error_count}, Timeouts: {timeout_count}", file=sys.stderr, flush=True)
     
     print(f"Valid channels: {len(valid_channels)}")
 

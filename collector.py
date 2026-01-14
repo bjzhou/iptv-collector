@@ -447,7 +447,7 @@ def process_playlists(urls, keywords, blacklist=None, whitelist=None, skip_valid
             timeout_count = 0
             error_count = 0
 
-            for future in tqdm(concurrent.futures.as_completed(futures, timeout=30), total=len(futures), unit="stream"):
+            for future in tqdm(concurrent.futures.as_completed(futures), total=len(futures), unit="stream"):
                 try:
                     result = future.result(timeout=30)
                     if result:

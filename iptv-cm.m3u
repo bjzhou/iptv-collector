@@ -11,16 +11,16 @@ http://[2409:8087:1e01:23::10]:8112/000000001000/5000000011000031101/1.m3u8?chan
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000002000020548/1.m3u8?channel-id=bestzb&Contentid=5000000002000020548&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="CCTV3" tvg-logo="https://tb.zbds.top/logo/CCTV3.png",CCTV3
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000004000008883/1.m3u8?channel-id=bestzb&Contentid=5000000004000008883&livemode=1&stbId=m
-#EXTINF:-1 tvg-name="CCTV3" tvg-id="5" tvg-logo="https://tb.zbds.top/logo/CCTV3.png",CCTV3
-http://112.30.73.119:229/tsfile/live/0003_2.m3u8?key=txiptv&playlive=0&authid=0
+#EXTINF:-1 tvg-name="CCTV3" tvg-id="3" tvg-logo="https://tb.zbds.top/logo/CCTV3.png",CCTV3
+http://112.27.5.218:9901/tsfile/live/faacts/0003_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-name="CCTV4" tvg-logo="https://tb.zbds.top/logo/CCTV4.png",CCTV4
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000005000030093/1.m3u8?channel-id=bestzb&Contentid=5000000005000030093&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="CCTV4" tvg-logo="https://tb.zbds.top/logo/CCTV4.png",CCTV4
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000011000031102/1.m3u8?channel-id=bestzb&Contentid=5000000011000031102&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="CCTV5" tvg-logo="https://tb.zbds.top/logo/CCTV5.png",CCTV5
-http://[2409:8087:1e01:23::10]:8112/000000001000/5000000010000016619/1.m3u8?channel-id=bestzb&Contentid=5000000010000016619&livemode=1&stbId=m
-#EXTINF:-1 tvg-name="CCTV5" tvg-logo="https://tb.zbds.top/logo/CCTV5.png",CCTV5
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000004000008885/1.m3u8?channel-id=bestzb&Contentid=5000000004000008885&livemode=1&stbId=m
+#EXTINF:-1 tvg-name="CCTV5" tvg-logo="https://tb.zbds.top/logo/CCTV5.png",CCTV5
+http://[2409:8087:1e01:23::10]:8112/000000001000/5000000010000016619/1.m3u8?channel-id=bestzb&Contentid=5000000010000016619&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="CCTV6" tvg-logo="https://tb.zbds.top/logo/CCTV6.png",CCTV6
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000010000018433/1.m3u8?channel-id=bestzb&Contentid=5000000010000018433&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="CCTV6" tvg-logo="https://tb.zbds.top/logo/CCTV6.png",CCTV6
@@ -34,13 +34,15 @@ http://[2409:8087:1e01:23::10]:8112/000000001000/5000000004000008888/1.m3u8?chan
 #EXTINF:-1 tvg-name="CCTV8" tvg-logo="https://tb.zbds.top/logo/CCTV8.png",CCTV8
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000010000018377/1.m3u8?channel-id=bestzb&Contentid=5000000010000018377&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="CCTV10" tvg-logo="https://tb.zbds.top/logo/CCTV10.png",CCTV10
-http://[2409:8087:1e01:23::10]:8112/000000001000/5000000010000016738/1.m3u8?channel-id=bestzb&Contentid=5000000010000016738&livemode=1&stbId=m
-#EXTINF:-1 tvg-name="CCTV10" tvg-logo="https://tb.zbds.top/logo/CCTV10.png",CCTV10
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000004000012827/1.m3u8?channel-id=bestzb&Contentid=5000000004000012827&livemode=1&stbId=m
-#EXTINF:-1 tvg-name="CCTV11" tvg-logo="https://tb.zbds.top/logo/CCTV11.png",CCTV11
-http://[2409:8087:1e01:23::10]:8112/000000001000/5000000011000031106/1.m3u8?channel-id=bestzb&Contentid=5000000011000031106&livemode=1&stbId=m
+#EXTINF:-1 tvg-name="CCTV10" tvg-logo="https://tb.zbds.top/logo/CCTV10.png",CCTV10
+http://[2409:8087:1e01:23::10]:8112/000000001000/5000000010000016738/1.m3u8?channel-id=bestzb&Contentid=5000000010000016738&livemode=1&stbId=m
+#EXTINF:-1 tvg-name="CCTV10" tvg-id="11" tvg-logo="https://tb.zbds.top/logo/CCTV10.png",CCTV10
+http://113.9.214.47:9003/hls/10/index.m3u8
 #EXTINF:-1 tvg-name="CCTV11" tvg-logo="https://tb.zbds.top/logo/CCTV11.png",CCTV11
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000006000040011/1.m3u8?channel-id=bestzb&Contentid=5000000006000040011&livemode=1&stbId=m
+#EXTINF:-1 tvg-name="CCTV11" tvg-logo="https://tb.zbds.top/logo/CCTV11.png",CCTV11
+http://[2409:8087:1e01:23::10]:8112/000000001000/5000000011000031106/1.m3u8?channel-id=bestzb&Contentid=5000000011000031106&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="CCTV12" tvg-logo="https://tb.zbds.top/logo/CCTV12.png",CCTV12
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000006000040012/1.m3u8?channel-id=bestzb&Contentid=5000000006000040012&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="CCTV12" tvg-logo="https://tb.zbds.top/logo/CCTV12.png",CCTV12
@@ -49,62 +51,60 @@ http://[2409:8087:1e01:23::10]:8112/000000001000/5000000011000031107/1.m3u8?chan
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000005000001827/1.m3u8?channel-id=bestzb&Contentid=5000000005000001827&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="CCTV13" tvg-logo="https://tb.zbds.top/logo/CCTV13.png",CCTV13
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000011000031108/1.m3u8?channel-id=bestzb&Contentid=5000000011000031108&livemode=1&stbId=m
-#EXTINF:-1 tvg-name="CCTV13" tvg-id="CCTV13" tvg-logo="https://tb.zbds.top/logo/CCTV13.png",CCTV13
+#EXTINF:-1 tvg-name="CCTV13" tvg-id="14" tvg-logo="https://tb.zbds.top/logo/CCTV13.png",CCTV13
 http://ali-m-l.cztv.com/channels/lantian/channel21/1080p.m3u8
 #EXTINF:-1 tvg-name="CCTV14" tvg-logo="https://tb.zbds.top/logo/CCTV14.png",CCTV14
-http://[2409:8087:1e01:23::10]:8112/000000001000/5000000010000023358/1.m3u8?channel-id=bestzb&Contentid=5000000010000023358&livemode=1&stbId=m
-#EXTINF:-1 tvg-name="CCTV14" tvg-logo="https://tb.zbds.top/logo/CCTV14.png",CCTV14
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000004000006673/1.m3u8?channel-id=bestzb&Contentid=5000000004000006673&livemode=1&stbId=m
-#EXTINF:-1 tvg-name="CCTV14" tvg-id="9" tvg-logo="https://tb.zbds.top/logo/CCTV14.png",CCTV14
-http://113.9.214.47:9003/hls/14/index.m3u8
+#EXTINF:-1 tvg-name="CCTV14" tvg-logo="https://tb.zbds.top/logo/CCTV14.png",CCTV14
+http://[2409:8087:1e01:23::10]:8112/000000001000/5000000010000023358/1.m3u8?channel-id=bestzb&Contentid=5000000010000023358&livemode=1&stbId=m
+#EXTINF:-1 tvg-name="CCTV14" tvg-id="15" tvg-logo="https://tb.zbds.top/logo/CCTV14.png",CCTV14
+http://58.56.162.102:4466/newlive/live/hls/15/live.m3u8
 #EXTINF:-1 tvg-name="CCTV15" tvg-logo="https://tb.zbds.top/logo/CCTV15.png",CCTV15
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000005000018417/1.m3u8?channel-id=bestzb&Contentid=5000000005000018417&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="CCTV15" tvg-logo="https://tb.zbds.top/logo/CCTV15.png",CCTV15
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000011000031109/1.m3u8?channel-id=bestzb&Contentid=5000000011000031109&livemode=1&stbId=m
+#EXTINF:-1 tvg-name="CCTV15" tvg-id="16" tvg-logo="https://tb.zbds.top/logo/CCTV15.png",CCTV15
+http://219.147.245.238:25480/newlive/live/hls/16/live.m3u8
 #EXTINF:-1 tvg-name="CCTV16" tvg-logo="https://tb.zbds.top/logo/CCTV16.png",CCTV16
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000008000023253/1.m3u8?channel-id=bestzb&Contentid=5000000008000023253&livemode=1&stbId=m
-#EXTINF:-1 tvg-name="CCTV16" tvg-id="6" tvg-logo="https://tb.zbds.top/logo/CCTV16.png",CCTV16
+#EXTINF:-1 tvg-name="CCTV16" tvg-id="17" tvg-logo="https://tb.zbds.top/logo/CCTV16.png",CCTV16
 http://219.147.245.238:25480/newlive/live/hls/17/live.m3u8
-#EXTINF:-1 tvg-id="CCTV1.cn@SD" tvg-name="CCTV-1" tvg-logo="https://tb.zbds.top/logo/CCTV-1.png",CCTV-1
-https://liveplay-srs.voc.com.cn/hls/tv/134_180adf.m3u8
 #EXTINF:-1 tvg-name="上海东方卫视" tvg-logo="https://tb.zbds.top/logo/上海东方卫视.png",上海东方卫视
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000010000032246/1.m3u8?channel-id=bestzb&Contentid=5000000010000032246&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="上海东方卫视" tvg-logo="https://tb.zbds.top/logo/上海东方卫视.png",上海东方卫视
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000004000014098/1.m3u8?channel-id=bestzb&Contentid=5000000004000014098&livemode=1&stbId=m
-#EXTINF:-1 tvg-name="东南卫视" tvg-id="16" tvg-logo="https://tb.zbds.top/logo/东南卫视.png",东南卫视
+#EXTINF:-1 tvg-name="东南卫视" tvg-id="96" tvg-logo="https://tb.zbds.top/logo/东南卫视.png",东南卫视
 http://live.zohi.tv/video/s10001-fztv-3/index.m3u8
 #EXTINF:-1 tvg-id="东方卫视" tvg-name="东方卫视" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/东方卫视.png" http-user-agent="AptvPlayer-UA",东方卫视
 http://bp-resource-dfl.bestv.cn/155/3/video.m3u8
 #EXTINF:-1 tvg-name="东方卫视4K" tvg-id="东方卫视4K" tvg-logo="https://tb.zbds.top/logo/东方卫视4K.png",东方卫视4K
 https://bp-resource-dfl.bestv.cn/148/3/video.m3u8
-#EXTINF:-1 tvg-name="云南卫视" tvg-logo="https://tb.zbds.top/logo/云南卫视.png",云南卫视
-http://[2409:8087:1e01:23::10]:8112/000000001000/5000000011000031120/1.m3u8?channel-id=bestzb&Contentid=5000000011000031120&livemode=1&stbId=m
+#EXTINF:-1 tvg-name="东方卫视" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/东方卫视4K.png" http-user-agent="aliplayer",东方卫视4K
+http://bp-resource-dfl.bestv.cn/148/3/video.m3u8
 #EXTINF:-1 tvg-name="云南卫视" tvg-logo="https://tb.zbds.top/logo/云南卫视.png",云南卫视
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000006000040019/1.m3u8?channel-id=bestzb&Contentid=5000000006000040019&livemode=1&stbId=m
-#EXTINF:-1 tvg-name="云南卫视" tvg-id="5" tvg-logo="https://tb.zbds.top/logo/云南卫视.png",云南卫视
-http://113.9.214.47:9003/hls/52/index.m3u8
+#EXTINF:-1 tvg-name="云南卫视" tvg-logo="https://tb.zbds.top/logo/云南卫视.png",云南卫视
+http://[2409:8087:1e01:23::10]:8112/000000001000/5000000011000031120/1.m3u8?channel-id=bestzb&Contentid=5000000011000031120&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="人间卫视" tvg-id="人间卫视" tvg-logo="https://tb.zbds.top/logo/人间卫视.png",人间卫视
 https://5ddce30eb4b55.streamlock.net/bltvhd/bltv1/chunklist_w511254805.m3u8
 #EXTINF:-1 tvg-name="兵团卫视" tvg-logo="https://tb.zbds.top/logo/兵团卫视.png",兵团卫视
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000006000040020/1.m3u8?channel-id=bestzb&Contentid=5000000006000040020&livemode=1&stbId=m
-#EXTINF:-1 tvg-name="农林卫视" tvg-id="4" tvg-logo="https://tb.zbds.top/logo/农林卫视.png",农林卫视
-http://111.59.24.227:8181/tsfile/live/1039_1.m3u8?key=txiptv&playlive=1&authid=0
-#EXTINF:-1 tvg-name="北京卫视" tvg-logo="https://tb.zbds.top/logo/北京卫视.png",北京卫视
-http://[2409:8087:1e01:23::10]:8112/000000001000/5000000010000011502/1.m3u8?channel-id=bestzb&Contentid=5000000010000011502&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="北京卫视" tvg-logo="https://tb.zbds.top/logo/北京卫视.png",北京卫视
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000004000031556/1.m3u8?channel-id=bestzb&Contentid=5000000004000031556&livemode=1&stbId=m
-#EXTINF:-1 tvg-name="厦门卫视" tvg-id="5" tvg-logo="https://tb.zbds.top/logo/厦门卫视.png",厦门卫视
+#EXTINF:-1 tvg-name="北京卫视" tvg-logo="https://tb.zbds.top/logo/北京卫视.png",北京卫视
+http://[2409:8087:1e01:23::10]:8112/000000001000/5000000010000011502/1.m3u8?channel-id=bestzb&Contentid=5000000010000011502&livemode=1&stbId=m
+#EXTINF:-1 tvg-name="北京卫视" tvg-id="90" tvg-logo="https://tb.zbds.top/logo/北京卫视.png",北京卫视
+http://113.9.214.47:9003/hls/37/index.m3u8
+#EXTINF:-1 tvg-name="厦门卫视" tvg-id="107" tvg-logo="https://tb.zbds.top/logo/厦门卫视.png",厦门卫视
 http://113.57.140.161:10081/newlive/live/hls/28/live.m3u8
 #EXTINF:-1 tvg-name="吉林卫视" tvg-logo="https://tb.zbds.top/logo/吉林卫视.png",吉林卫视
-http://[2409:8087:1e01:23::10]:8112/000000001000/5000000006000040013/1.m3u8?channel-id=bestzb&Contentid=5000000006000040013&livemode=1&stbId=m
-#EXTINF:-1 tvg-name="吉林卫视" tvg-logo="https://tb.zbds.top/logo/吉林卫视.png",吉林卫视
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000011000031117/1.m3u8?channel-id=bestzb&Contentid=5000000011000031117&livemode=1&stbId=m
-#EXTINF:-1 tvg-name="吉林卫视" tvg-id="6" tvg-logo="https://tb.zbds.top/logo/吉林卫视.png",吉林卫视
+#EXTINF:-1 tvg-name="吉林卫视" tvg-logo="https://tb.zbds.top/logo/吉林卫视.png",吉林卫视
+http://[2409:8087:1e01:23::10]:8112/000000001000/5000000006000040013/1.m3u8?channel-id=bestzb&Contentid=5000000006000040013&livemode=1&stbId=m
+#EXTINF:-1 tvg-name="吉林卫视" tvg-id="98" tvg-logo="https://tb.zbds.top/logo/吉林卫视.png",吉林卫视
 http://113.9.214.47:9003/hls/35/index.m3u8
 #EXTINF:-1 tvg-name="四川卫视" tvg-logo="https://tb.zbds.top/logo/四川卫视.png",四川卫视
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000004000006119/1.m3u8?channel-id=bestzb&Contentid=5000000004000006119&livemode=1&stbId=m
-#EXTINF:-1 tvg-name="四川卫视" tvg-id="8" tvg-logo="https://tb.zbds.top/logo/四川卫视.png",四川卫视
-http://113.9.214.47:9003/hls/40/index.m3u8
 #EXTINF:-1 tvg-name="四川康巴卫视" tvg-logo="https://tb.zbds.top/logo/四川康巴卫视.png",四川康巴卫视
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000003000001598/1.m3u8?channel-id=bestzb&Contentid=5000000003000001598&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="天津卫视" tvg-logo="https://tb.zbds.top/logo/天津卫视.png",天津卫视
@@ -117,8 +117,8 @@ http://[2409:8087:1e01:23::10]:8112/000000001000/5000000006000040022/1.m3u8?chan
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000001000027288/1.m3u8?channel-id=bestzb&Contentid=5000000001000027288&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="安徽卫视" tvg-logo="https://tb.zbds.top/logo/安徽卫视.png",安徽卫视
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000004000023002/1.m3u8?channel-id=bestzb&Contentid=5000000004000023002&livemode=1&stbId=m
-#EXTINF:-1 tvg-name="安徽卫视" tvg-id="18" tvg-logo="https://tb.zbds.top/logo/安徽卫视.png",安徽卫视
-http://219.147.245.238:25480/newlive/live/hls/40/live.m3u8
+#EXTINF:-1 tvg-name="安徽卫视" tvg-id="87" tvg-logo="https://tb.zbds.top/logo/安徽卫视.png",安徽卫视
+http://118.122.144.115:8888/newlive/live/hls/40/live.m3u8
 #EXTINF:-1 tvg-name="山东卫视" tvg-logo="https://tb.zbds.top/logo/山东卫视.png",山东卫视
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000004000020424/1.m3u8?channel-id=bestzb&Contentid=5000000004000020424&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="山东卫视" tvg-logo="https://tb.zbds.top/logo/山东卫视.png",山东卫视
@@ -135,16 +135,14 @@ http://[2409:8087:1e01:23::10]:8112/000000001000/5000000010000030417/1.m3u8?chan
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000006000040014/1.m3u8?channel-id=bestzb&Contentid=5000000006000040014&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="广西卫视" tvg-logo="https://tb.zbds.top/logo/广西卫视.png",广西卫视
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000011000031118/1.m3u8?channel-id=bestzb&Contentid=5000000011000031118&livemode=1&stbId=m
-#EXTINF:-1 tvg-name="延边卫视" tvg-id="延边卫视" tvg-logo="https://tb.zbds.top/logo/延边卫视.png",延边卫视
-http://l.cztvcloud.com/channels/lantian/SXxinchang2/720p.m3u8#
-#EXTINF:-1 tvg-name="新疆卫视" tvg-id="2" tvg-logo="https://tb.zbds.top/logo/新疆卫视.png",新疆卫视
-http://222.71.55.147:9901/tsfile/live/0110_1.m3u8?key=txiptv&playlive=0&authid=0
 #EXTINF:-1 tvg-name="新疆卫视" tvg-logo="https://tb.zbds.top/logo/新疆卫视.png",新疆卫视
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000006000040018/1.m3u8?channel-id=bestzb&Contentid=5000000006000040018&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="江苏卫视" tvg-logo="https://tb.zbds.top/logo/江苏卫视.png",江苏卫视
-http://[2409:8087:1e01:23::10]:8112/000000001000/5000000004000019351/1.m3u8?channel-id=bestzb&Contentid=5000000004000019351&livemode=1&stbId=m
-#EXTINF:-1 tvg-name="江苏卫视" tvg-logo="https://tb.zbds.top/logo/江苏卫视.png",江苏卫视
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000010000018509/1.m3u8?channel-id=bestzb&Contentid=5000000010000018509&livemode=1&stbId=m
+#EXTINF:-1 tvg-name="江苏卫视" tvg-logo="https://tb.zbds.top/logo/江苏卫视.png",江苏卫视
+http://[2409:8087:1e01:23::10]:8112/000000001000/5000000004000019351/1.m3u8?channel-id=bestzb&Contentid=5000000004000019351&livemode=1&stbId=m
+#EXTINF:-1 tvg-name="江苏卫视" tvg-id="91" tvg-logo="https://tb.zbds.top/logo/江苏卫视.png",江苏卫视
+http://113.57.140.161:10081/newlive/live/hls/31/live.m3u8
 #EXTINF:-1 tvg-name="江西卫视" tvg-logo="https://tb.zbds.top/logo/江西卫视.png",江西卫视
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000001000032154/1.m3u8?channel-id=bestzb&Contentid=5000000001000032154&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="江西卫视" tvg-logo="https://tb.zbds.top/logo/江西卫视.png",江西卫视
@@ -154,15 +152,17 @@ http://event.pull.hebtv.com/jishi/weishi_tingyun.m3u8
 #EXTINF:-1 tvg-name="河北卫视" tvg-logo="https://tb.zbds.top/logo/河北卫视.png",河北卫视
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000006000040016/1.m3u8?channel-id=bestzb&Contentid=5000000006000040016&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="河南卫视" tvg-logo="https://tb.zbds.top/logo/河南卫视.png",河南卫视
-http://[2409:8087:1e01:23::10]:8112/000000001000/5000000005000017925/1.m3u8?channel-id=bestzb&Contentid=5000000005000017925&livemode=1&stbId=m
-#EXTINF:-1 tvg-name="河南卫视" tvg-logo="https://tb.zbds.top/logo/河南卫视.png",河南卫视
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000011000031119/1.m3u8?channel-id=bestzb&Contentid=5000000011000031119&livemode=1&stbId=m
-#EXTINF:-1 tvg-name="浙江卫视" tvg-id="浙江卫视" tvg-logo="https://tb.zbds.top/logo/浙江卫视.png",浙江卫视
-http://ali-m-l.cztv.com:80/channels/lantian/channel001/1080p.m3u8
-#EXTINF:-1 tvg-name="浙江卫视" tvg-logo="https://tb.zbds.top/logo/浙江卫视.png",浙江卫视
-http://[2409:8087:1e01:23::10]:8112/000000001000/5000000004000007275/1.m3u8?channel-id=bestzb&Contentid=5000000004000007275&livemode=1&stbId=m
+#EXTINF:-1 tvg-name="河南卫视" tvg-logo="https://tb.zbds.top/logo/河南卫视.png",河南卫视
+http://[2409:8087:1e01:23::10]:8112/000000001000/5000000005000017925/1.m3u8?channel-id=bestzb&Contentid=5000000005000017925&livemode=1&stbId=m
+#EXTINF:-1 tvg-name="河南卫视" tvg-id="100" tvg-logo="https://tb.zbds.top/logo/河南卫视.png",河南卫视
+http://113.9.214.47:9003/hls/49/index.m3u8
 #EXTINF:-1 tvg-name="浙江卫视" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/浙江卫视.png",浙江卫视
 http://ali-m-l.cztv.com/channels/lantian/channel001/1080p.m3u8
+#EXTINF:-1 tvg-name="浙江卫视" tvg-id="88" tvg-logo="https://tb.zbds.top/logo/浙江卫视.png",浙江卫视
+https://ali-m-l.cztv.com/channels/lantian/channel001/1080p.m3u8
+#EXTINF:-1 tvg-name="浙江卫视" tvg-logo="https://tb.zbds.top/logo/浙江卫视.png",浙江卫视
+http://[2409:8087:1e01:23::10]:8112/000000001000/5000000004000007275/1.m3u8?channel-id=bestzb&Contentid=5000000004000007275&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="浙江卫视" tvg-logo="https://tb.zbds.top/logo/浙江卫视.png",浙江卫视
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000010000017320/1.m3u8?channel-id=bestzb&Contentid=5000000010000017320&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="浙江卫视" tvg-logo="https://tb.zbds.top/logo/浙江卫视.png",浙江卫视
@@ -170,55 +170,57 @@ http://[2409:8087:1e01:23::10]:8112/000000001000/1000000001000014260/1.m3u8?chan
 #EXTINF:-1 tvg-name="海南卫视" tvg-logo="https://tb.zbds.top/logo/海南卫视.png",海南卫视
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000004000006211/1.m3u8?channel-id=bestzb&Contentid=5000000004000006211&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="深圳卫视" tvg-logo="https://tb.zbds.top/logo/深圳卫视.png",深圳卫视
-http://[2409:8087:1e01:23::10]:8112/000000001000/5000000010000024026/1.m3u8?channel-id=bestzb&Contentid=5000000010000024026&livemode=1&stbId=m
-#EXTINF:-1 tvg-name="深圳卫视" tvg-logo="https://tb.zbds.top/logo/深圳卫视.png",深圳卫视
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000004000007410/1.m3u8?channel-id=bestzb&Contentid=5000000004000007410&livemode=1&stbId=m
+#EXTINF:-1 tvg-name="深圳卫视" tvg-logo="https://tb.zbds.top/logo/深圳卫视.png",深圳卫视
+http://[2409:8087:1e01:23::10]:8112/000000001000/5000000010000024026/1.m3u8?channel-id=bestzb&Contentid=5000000010000024026&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="湖北卫视" tvg-logo="https://tb.zbds.top/logo/湖北卫视.png",湖北卫视
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000010000022140/1.m3u8?channel-id=bestzb&Contentid=5000000010000022140&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="湖北卫视" tvg-logo="https://tb.zbds.top/logo/湖北卫视.png",湖北卫视
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000004000014954/1.m3u8?channel-id=bestzb&Contentid=5000000004000014954&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="湖南卫视" tvg-logo="https://tb.zbds.top/logo/湖南卫视.png",湖南卫视
-http://[2409:8087:1e01:23::10]:8112/000000001000/5000000004000006692/1.m3u8?channel-id=bestzb&Contentid=5000000004000006692&livemode=1&stbId=m
+http://[2409:8087:1e01:23::10]:8112/000000001000/5000000010000030452/1.m3u8?channel-id=bestzb&Contentid=5000000010000030452&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="湖南卫视" tvg-logo="https://tb.zbds.top/logo/湖南卫视.png",湖南卫视
 http://[2409:8087:1e01:23::10]:8112/000000001000/1000000001000032695/1.m3u8?channel-id=ystenlive&Contentid=1000000001000032695&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="湖南卫视" tvg-logo="https://tb.zbds.top/logo/湖南卫视.png",湖南卫视
-http://[2409:8087:1e01:23::10]:8112/000000001000/5000000010000030452/1.m3u8?channel-id=bestzb&Contentid=5000000010000030452&livemode=1&stbId=m
+http://[2409:8087:1e01:23::10]:8112/000000001000/5000000004000006692/1.m3u8?channel-id=bestzb&Contentid=5000000004000006692&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="甘肃卫视" tvg-logo="https://tb.zbds.top/logo/甘肃卫视.png",甘肃卫视
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000006000040021/1.m3u8?channel-id=bestzb&Contentid=5000000006000040021&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="福建东南卫视" tvg-logo="https://tb.zbds.top/logo/福建东南卫视.png",福建东南卫视
-http://[2409:8087:1e01:23::10]:8112/000000001000/5000000004000010584/1.m3u8?channel-id=bestzb&Contentid=5000000004000010584&livemode=1&stbId=m
-#EXTINF:-1 tvg-name="福建东南卫视" tvg-logo="https://tb.zbds.top/logo/福建东南卫视.png",福建东南卫视
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000001000005829/1.m3u8?channel-id=bestzb&Contentid=5000000001000005829&livemode=1&stbId=m
+#EXTINF:-1 tvg-name="福建东南卫视" tvg-logo="https://tb.zbds.top/logo/福建东南卫视.png",福建东南卫视
+http://[2409:8087:1e01:23::10]:8112/000000001000/5000000004000010584/1.m3u8?channel-id=bestzb&Contentid=5000000004000010584&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="西藏藏语卫视" tvg-logo="https://tb.zbds.top/logo/西藏藏语卫视.png",西藏藏语卫视
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000002000021549/1.m3u8?channel-id=bestzb&Contentid=5000000002000021549&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="贵州卫视" tvg-logo="https://tb.zbds.top/logo/贵州卫视.png",贵州卫视
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000004000025843/1.m3u8?channel-id=bestzb&Contentid=5000000004000025843&livemode=1&stbId=m
-#EXTINF:-1 tvg-name="贵州卫视" tvg-id="26" tvg-logo="https://tb.zbds.top/logo/贵州卫视.png",贵州卫视
-http://118.122.144.115:8888/newlive/live/hls/39/live.m3u8
-#EXTINF:-1 tvg-name="辽宁卫视" tvg-logo="https://tb.zbds.top/logo/辽宁卫视.png",辽宁卫视
-http://[2409:8087:1e01:23::10]:8112/000000001000/5000000001000008940/1.m3u8?channel-id=bestzb&Contentid=5000000001000008940&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="辽宁卫视" tvg-logo="https://tb.zbds.top/logo/辽宁卫视.png",辽宁卫视
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000004000011671/1.m3u8?channel-id=bestzb&Contentid=5000000004000011671&livemode=1&stbId=m
+#EXTINF:-1 tvg-name="辽宁卫视" tvg-logo="https://tb.zbds.top/logo/辽宁卫视.png",辽宁卫视
+http://[2409:8087:1e01:23::10]:8112/000000001000/5000000001000008940/1.m3u8?channel-id=bestzb&Contentid=5000000001000008940&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="重庆卫视" tvg-logo="https://tb.zbds.top/logo/重庆卫视.png",重庆卫视
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000004000025797/1.m3u8?channel-id=bestzb&Contentid=5000000004000025797&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="陕西卫视" tvg-logo="https://tb.zbds.top/logo/陕西卫视.png",陕西卫视
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000006000040017/1.m3u8?channel-id=bestzb&Contentid=5000000006000040017&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="青海卫视" tvg-logo="https://tb.zbds.top/logo/青海卫视.png",青海卫视
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000006000040015/1.m3u8?channel-id=bestzb&Contentid=5000000006000040015&livemode=1&stbId=m
-#EXTINF:-1 tvg-name="青海卫视" tvg-id="1" tvg-logo="https://tb.zbds.top/logo/青海卫视.png",青海卫视
-http://112.27.5.218:9901/tsfile/live/faacts/0140_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-name="青海安多卫视" tvg-logo="https://tb.zbds.top/logo/青海安多卫视.png",青海安多卫视
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000006000022124/1.m3u8?channel-id=bestzb&Contentid=5000000006000022124&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="黑龙江卫视" tvg-logo="https://tb.zbds.top/logo/黑龙江卫视.png",黑龙江卫视
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000010000031107/1.m3u8?channel-id=bestzb&Contentid=5000000010000031107&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="黑龙江卫视" tvg-logo="https://tb.zbds.top/logo/黑龙江卫视.png",黑龙江卫视
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000004000025203/1.m3u8?channel-id=bestzb&Contentid=5000000004000025203&livemode=1&stbId=m
-#EXTINF:-1 tvg-id="黑龙江卫视" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/黑龙江卫视.png" tvg-name="黑龙江卫视",黑龙江卫视
-https://idclive.hljtv.com:4430/live/hljws_own.m3u8
 #EXTINF:-1 tvg-id="美亚C+" tvg-name="美亚C+" tvg-logo="https://gitee.com/suxuang/logo/raw/master/logo/美亚C.png",美亚C+
 http://ottproxy2.ist.ooo/livehls/MOB-U1-NO/03.m3u8
 #EXTINF:-1 tvg-name="翡翠台" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/翡翠台.png",翡翠台
 http://iptv.4666888.xyz/iptv2A.php?id=34
+#EXTINF:-1 tvg-id="凤凰中文" tvg-name="凤凰中文" tvg-logo="https://live.fanmingming.cn/tv/凤凰卫视中文台.png",凤凰中文
+http://43.152.224.209/qctv.fengshows.cn/live/0701pcc72.flv
+#EXTINF:-1 tvg-id="凤凰资讯" tvg-name="凤凰资讯" tvg-logo="https://live.fanmingming.cn/tv/凤凰卫视资讯台.png",凤凰资讯
+http://43.152.224.209/qctv.fengshows.cn/live/0701pin72.flv
+#EXTINF:-1 tvg-id="凤凰香港" tvg-name="凤凰香港" tvg-logo="https://live.fanmingming.cn/tv/凤凰卫视香港台.png",凤凰香港
+http://43.152.224.209/qctv.fengshows.cn/live/0701phk72.flv
+#EXTINF:-1 tvg-logo="https://ghproxy.net/raw.githubusercontent.com/suxuang/myIPTV/main/img/特种兵之火凤凰.png" tvg-name="特种兵之火凤凰",特种兵之火凤凰
+https://live.ottiptv.cc/huya/29982636
 #EXTINF:-1 tvg-name="明珠台" tvg-logo="https://gitee.com/suxuang/logo/raw/master/mylogo/明珠台.png",明珠台
 http://iptv.4666888.xyz/iptv2A.php?id=29
 #EXTINF:-1 tvg-name="CETV1" tvg-logo="https://tb.zbds.top/logo/CETV1.png",CETV1
@@ -237,8 +239,6 @@ http://[2409:8087:1e01:23::10]:8112/000000001000/5000000006000040025/1.m3u8?chan
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000002000023636/1.m3u8?channel-id=bestzb&Contentid=5000000002000023636&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="SiTV动漫秀场" tvg-logo="https://tb.zbds.top/logo/SiTV动漫秀场.png",SiTV动漫秀场
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000011000031113/1.m3u8?channel-id=bestzb&Contentid=5000000011000031113&livemode=1&stbId=m
-#EXTINF:-1 tvg-name="SiTV欢笑剧场" tvg-logo="https://tb.zbds.top/logo/SiTV欢笑剧场.png",SiTV欢笑剧场
-http://[2409:8087:1e01:23::10]:8112/000000001000/5000000002000009455/1.m3u8?channel-id=bestzb&Contentid=5000000002000009455&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="SiTV欢笑剧场-4K" tvg-logo="https://tb.zbds.top/logo/SiTV欢笑剧场-4K.png",SiTV欢笑剧场-4K
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000007000010001/1.m3u8?channel-id=bestzb&Contentid=5000000007000010001&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="SiTV法治天地" tvg-logo="https://tb.zbds.top/logo/SiTV法治天地.png",SiTV法治天地
@@ -250,17 +250,17 @@ http://[2409:8087:1e01:23::10]:8112/000000001000/5000000002000027005/1.m3u8?chan
 #EXTINF:-1 tvg-name="SiTV生活时尚" tvg-logo="https://tb.zbds.top/logo/SiTV生活时尚.png",SiTV生活时尚
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000002000019634/1.m3u8?channel-id=bestzb&Contentid=5000000002000019634&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="SiTV都市剧场" tvg-logo="https://tb.zbds.top/logo/SiTV都市剧场.png",SiTV都市剧场
-http://[2409:8087:1e01:23::10]:8112/000000001000/5000000002000004412/1.m3u8?channel-id=bestzb&Contentid=5000000002000004412&livemode=1&stbId=m
-#EXTINF:-1 tvg-name="SiTV都市剧场" tvg-logo="https://tb.zbds.top/logo/SiTV都市剧场.png",SiTV都市剧场
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000011000031111/1.m3u8?channel-id=bestzb&Contentid=5000000011000031111&livemode=1&stbId=m
+#EXTINF:-1 tvg-name="SiTV都市剧场" tvg-logo="https://tb.zbds.top/logo/SiTV都市剧场.png",SiTV都市剧场
+http://[2409:8087:1e01:23::10]:8112/000000001000/5000000002000004412/1.m3u8?channel-id=bestzb&Contentid=5000000002000004412&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="SiTV金色学堂" tvg-logo="https://tb.zbds.top/logo/SiTV金色学堂.png",SiTV金色学堂
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000010000026105/1.m3u8?channel-id=bestzb&Contentid=5000000010000026105&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="上海东方影视" tvg-logo="https://tb.zbds.top/logo/上海东方影视.png",上海东方影视
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000010000032212/1.m3u8?channel-id=bestzb&Contentid=5000000010000032212&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="上海东方购物" tvg-logo="https://tb.zbds.top/logo/上海东方购物.png",上海东方购物
-http://[2409:8087:1e01:23::10]:8112/000000001000/5000000011000031124/1.m3u8?channel-id=bestzb&Contentid=5000000011000031124&livemode=1&stbId=m
-#EXTINF:-1 tvg-name="上海东方购物" tvg-logo="https://tb.zbds.top/logo/上海东方购物.png",上海东方购物
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000011000031125/1.m3u8?channel-id=bestzb&Contentid=5000000011000031125&livemode=1&stbId=m
+#EXTINF:-1 tvg-name="上海东方购物" tvg-logo="https://tb.zbds.top/logo/上海东方购物.png",上海东方购物
+http://[2409:8087:1e01:23::10]:8112/000000001000/5000000011000031124/1.m3u8?channel-id=bestzb&Contentid=5000000011000031124&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="上海东方购物" tvg-logo="https://tb.zbds.top/logo/上海东方购物.png",上海东方购物
 http://[2409:8087:1e01:23::10]:8112/000000001000/5000000007000010004/1.m3u8?channel-id=bestzb&Contentid=5000000007000010004&livemode=1&stbId=m
 #EXTINF:-1 tvg-name="上海五星体育" tvg-logo="https://tb.zbds.top/logo/上海五星体育.png",上海五星体育
